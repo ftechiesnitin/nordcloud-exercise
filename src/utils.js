@@ -5,9 +5,7 @@
  * @returns {Number}
  */
 function findDistance(pointA, pointB) {
-    return Math.sqrt(
-        Math.pow(Math.abs(pointA[0] - pointB[0]), 2) + Math.pow(Math.abs(pointA[1] - pointB[1]), 2)
-    );
+  return Math.sqrt((Math.abs(pointA[0] - pointB[0]) ** 2) + (Math.abs(pointA[1] - pointB[1]) ** 2));
 }
 
 /**
@@ -17,7 +15,7 @@ function findDistance(pointA, pointB) {
  * @returns {Number}
  */
 function findPower(reach, distance) {
-    return (distance > reach ? 0 : Math.pow((reach - distance), 2))
+  return (distance > reach ? 0 : ((reach - distance) ** 2));
 }
 
 /**
@@ -27,17 +25,18 @@ function findPower(reach, distance) {
  * @returns {Number[]}
  */
 function findSuitableStation(point, stations) {
+  return stations.filter((station) => {
+    const range = station[2]; const coordinates = station.slice(0, 2);
 
-    return stations.filter((station, i) => {
-        let range = station[2], coordinates = station.slice(0, 2),
-            power = findPower(
-                range, 
-                findDistance(point, coordinates)
-            );
 
-        station.splice(3, 0, power)
-        return power > 0;
-    }).sort((stationA, stationB) => stationA[3] < stationB[3])[0];
+    const power = findPower(
+      range,
+      findDistance(point, coordinates),
+    );
+
+    station.splice(3, 0, power);
+    return power > 0;
+  }).sort((stationA, stationB) => stationA[3] < stationB[3])[0];
 }
 
 /**
@@ -47,20 +46,19 @@ function findSuitableStation(point, stations) {
  * @returns {String}
  */
 function solution(devices, stations) {
-    devices.forEach(device => {
-        let bestStation = findSuitableStation(device, stations);
+  devices.forEach((device) => {
+    const bestStation = findSuitableStation(device, stations);
 
-        if(bestStation) {
-            console.log("Point [", device[0], ',', device[1], "]: Best link station at [", bestStation[0], ',', bestStation[1], "] power: ", bestStation[3].toFixed(2));
-        }else {
-            console.log("Point [", device[0], ',', device[1], "]: No link station within reach");
-        }
-    });
+    if (bestStation) {
+      return console.log('Point [', device[0], ',', device[1], ']: Best link station at [', bestStation[0], ',', bestStation[1], '] power: ', bestStation[3].toFixed(2));
+    }
+    return console.log('Point [', device[0], ',', device[1], ']: No link station within reach');
+  });
 }
 
 module.exports = {
-    findDistance,
-    findPower,
-    findSuitableStation,
-    solution
-}
+  findDistance,
+  findPower,
+  findSuitableStation,
+  solution,
+};
