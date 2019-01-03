@@ -26,7 +26,8 @@ function findPower(reach, distance) {
  */
 function findSuitableStation(point, stations) {
   return stations.filter((station) => {
-    const range = station[2]; const coordinates = station.slice(0, 2);
+    const range = station[2];
+    const coordinates = station.slice(0, 2);
 
 
     const power = findPower(

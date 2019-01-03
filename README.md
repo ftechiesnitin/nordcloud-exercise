@@ -4,12 +4,12 @@
 ### How to run the application?
 - Clone this repository.
 - Run `npm install` to install test libs.
-- After setting up run `npm start` execute.
+- After setting up run `npm start` and this will execute the solution and solve the below problem.
 - If you wanna play around, you can change the link stations or devices co-ordinates and range from `index.js` in project root.
 - Run test cases with the command `npm test`, it will run all the test cases present in the project.
 - Feel free to add more and test.
 - To check the linting config follow `.eslintrc.json`.
-- Test linting configa and fix the errors with command `npm run lint`
+- Test linting config and fix the errors with command `npm run lint`
 
 ### Folder Structure
 ```bash
